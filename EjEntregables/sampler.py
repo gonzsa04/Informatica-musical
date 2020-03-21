@@ -8,13 +8,14 @@ CHUNK = 1024 # tamanio del buffer
 
 # diccionario de notas con clave = nombre de la nota, valor: distancia en semitonos a DO
 notes = {'DO':0, 'DO#':1, 'RE':2, 'RE#':3, 'MI':4, 'FA':5, 'FA#':6, 'SOL':7, 'SOL#':8, 'LA':9, 'LA#':10, 'SI':11, 'DO\'':12}
-R = 1.059463 # raiz doceava de 2 (http://elclubdelautodidacta.es/wp/2012/08/calculo-de-la-frecuencia-de-nuestras-notas-musicales/)
+R = 1.059463 # raiz doceava de 2
+# COMO SACO LAS NOTAS A PARTIR DE LA DE REFERENCIA -> (http://elclubdelautodidacta.es/wp/2012/08/calculo-de-la-frecuencia-de-nuestras-notas-musicales/)
 
 class Sampler:
-    defaultSample = np.array([])
-    sample = np.array([])
+    defaultSample = np.array([])  # sample original de la nota de referencia
+    sample = np.array([])         # sample de la nota que sonara, modificado a partir del sample/nota de referencia
+    loopInterval = np.array([])   # trozo de sample que se repetira (loop) -> zona de sustain
     interval = np.zeros([2])
-    loopInterval = np.array([])
     note = 0
     frec = 0
     ini = 0
@@ -67,7 +68,7 @@ class Sampler:
         if self.ini == self.fin:  # ha alcanzado el sustain
             self.attackPhase = False
     
-    """va avanzando el chunk (ventana [ini, fin]), haciendo un loop en la zona de sustain"""
+    """va avanzando el chunk (ventana [ini, fin]), haciendo un loop en la zona de sustain con efecto ping pong"""
     def __loop(self):
         self.ini = self.loops*CHUNK
         self.fin = self.loops*CHUNK+CHUNK
@@ -81,7 +82,7 @@ class Sampler:
             self.loops = 0
             self.ini = self.loops*CHUNK
             self.fin = self.loops*CHUNK+CHUNK
-            self.loopInterval = np.flip(self.loopInterval)
+            self.loopInterval = np.flip(self.loopInterval) # se le da la vuelta al intervalo de sustain (efecto ping pong)
 
         self.loops += 1
 
