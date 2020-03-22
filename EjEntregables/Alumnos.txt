@@ -1,0 +1,6 @@
+Jorge Rodríguez García
+Gonzalo Sanz Lastra
+
+Completada la parte obligatoria y el apartado de efectos de la parte opcional
+
+Hemos tenido problemas con ASIO dado que al hacer el trabajo juntos a traves de skype, ASIO muteaba los micros y altavoces de ambos. Pero obviando este problema todo funciona correctamente.
