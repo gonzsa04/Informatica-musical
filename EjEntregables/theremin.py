@@ -74,6 +74,9 @@ while frame < endFrame:
         print("Vol = ", vol)
 
     for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
         if event.type == pygame.MOUSEMOTION:
             mouseX, mouseY = event.pos
             fc = (mouseX*maxFrec)/WIDTH
@@ -84,5 +87,3 @@ while frame < endFrame:
     samples = samples * envSamples[frame:frame+CHUNK]
     frame += CHUNK
     stream.write(samples.tobytes())
-
-pygame.quit()
