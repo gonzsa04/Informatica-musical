@@ -1,0 +1,11 @@
+Jorge Rodr¨ªguez Garc¨ªa y Gonzalo Sanz Lastra, grupo 28
+
+Mejoras: al pulsar M se muestra el mapa desde arriba durante varios segundos, 
+quitandole al jugador la posibilidad de moverse y restando energ¨ªa.
+
+Nota: las escenas de test no funcionan correctamente debido a que en el componente
+PLayerController se llama al GameManager en el Update para actualizar el GUI. 
+Como en esas escenas a¨²n no estaba implementado el GameManager ni hab¨ªa ning¨²n GUI 
+salta un aviso y no deja mover al jugador. Basta con comentar esa l¨ªnea de c¨®digo
+para que todas las escenas test funcionen con normalidad y habilitarla a la hora de 
+jugar el juego final.
