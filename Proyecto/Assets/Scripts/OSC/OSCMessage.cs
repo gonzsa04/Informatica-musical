@@ -138,6 +138,8 @@ namespace UnityOSC
 
 					case STRING:
 						value = OSCPacket.UnpackValue<string>(data, ref start);
+                        float[] move = { 0, 1, 2, 3, 4, 5, 6, 7 };
+                        move = OSCPacket.UnpackValue<float[]>(data, ref start);
 						break;
 
 					case BYTE:

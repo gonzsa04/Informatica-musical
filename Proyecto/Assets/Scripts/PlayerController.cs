@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
 
 public class PlayerController : MonoBehaviour {
 	// Use this for initialization
@@ -29,7 +31,12 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.W) && (Physics.Raycast (this.transform.position, this.transform.forward, 0.75f) != muro.gameObject)) {//si pulsamos w y no hay muro delante
 			this.transform.position += this.transform.forward;//se mueve hacia donde estemos mirando
 			energia -= (1 + numJoyas);//la energia se restara en funcion de los movimientos y del num de joyas portadas
-		} else if (Input.GetKeyDown (KeyCode.A))//si pulsamos a
+
+            List<float> move = new List<float>(){ 0, 1, 2 };
+            OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadNote","/play", move);
+            Debug.Log("move");
+        }
+        else if (Input.GetKeyDown (KeyCode.A))//si pulsamos a
 			this.transform.Rotate (new Vector3 (0, -90, 0));//gira hacia la izq 90 grados
 		else if (Input.GetKeyDown (KeyCode.D))//si pulsamos la d
 			this.transform.Rotate (new Vector3 (0, 90, 0));//gira hacia la derecha 90 grados
