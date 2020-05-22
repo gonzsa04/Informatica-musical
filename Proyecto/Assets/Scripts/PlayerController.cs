@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using System;
 
 public class PlayerController : MonoBehaviour {
@@ -32,9 +31,7 @@ public class PlayerController : MonoBehaviour {
 			this.transform.position += this.transform.forward;//se mueve hacia donde estemos mirando
 			energia -= (1 + numJoyas);//la energia se restara en funcion de los movimientos y del num de joyas portadas
 
-            List<float> move = new List<float>(){ 0, 1, 2 };
-            OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadNote","/play", move);
-            Debug.Log("move");
+            DynamicMusicManager.play();
         }
         else if (Input.GetKeyDown (KeyCode.A))//si pulsamos a
 			this.transform.Rotate (new Vector3 (0, -90, 0));//gira hacia la izq 90 grados

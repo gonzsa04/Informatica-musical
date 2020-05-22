@@ -1,8 +1,10 @@
 (
 
 ~kkVar = Buffer.read(Server.default, "D:/Users/Gonzalo/Desktop/UCM/1ro/MOTORES/Grupo28/Assets/Sounds/bShoot.wav");
-~maxSize = 15;
-~notesArray = Array.new(~maxSize);
+~numNotes = 5;
+~notesArray = Array.new(~numNotes);
+~numParams = 1;
+~paramsArray = Array.new(~numParams);
 
 SynthDef(\sampler, {
 	arg out = 0, rate = 1, amp = 0.5, buffer = 0;
@@ -32,7 +34,6 @@ OSCdef.new(
 OSCdef.new(
 	\loadNote,
 	{arg msg;
-		//msg[1].postln;
 		~notesArray.add(msg[1]);
 	},
 	'/loadNote',
@@ -40,11 +41,24 @@ OSCdef.new(
 );
 
 OSCdef.new(
+	\loadParams,
+	{arg msg;
+		~paramsArray.add(msg[1]);
+	},
+	'/loadParams',
+	nil,57120
+);
+
+OSCdef.new(
 	\play,
 	{arg msg;
 		//msg[1].postln;
-		Pbind(\degree, Pseq([~notesArray])).play;
-		~notesArray = Array.new(~maxSize);
+		var scale;
+		if(~paramsArray[2] == 0, {scale = Scale.major}, {scale = Scale.minor});
+
+		Pbind(\degree, Pseq([~notesArray]), \dur, ~paramsArray[0], \amp, ~paramsArray[1], \scale, scale).play;
+		~notesArray = Array.new(~numNotes);
+		~paramsArray = Array.new(~numParams);
 	},
 	'/play',
 	nil,57120

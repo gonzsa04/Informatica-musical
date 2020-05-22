@@ -242,13 +242,12 @@ public class OSCHandler : MonoBehaviour
 		SendMessageToClient(clientId, address, temp);
 	}
 
-    public void SendMessagesToClient<T>(string clientId, string addressToLoad, string address, List<T> values)
+    public void SendMessagesToClient<T>(string clientId, string address, List<T> values)
     {
         for (int i = 0; i < values.Count; i++)
         {
-            SendMessageToClient(clientId, addressToLoad, values[i]);
+            SendMessageToClient(clientId, address, values[i]);
         }
-        SendMessageToClient(clientId, address, 0.0);
     }
 
     /// <summary>
