@@ -3,7 +3,7 @@
 ~kkVar = Buffer.read(Server.default, "D:/Users/Gonzalo/Desktop/UCM/1ro/MOTORES/Grupo28/Assets/Sounds/bShoot.wav");
 ~numNotes = 5;
 ~notesArray = Array.new(~numNotes);
-~numParams = 1;
+~numParams = 5;
 ~paramsArray = Array.new(~numParams);
 
 SynthDef(\sampler, {
@@ -56,7 +56,7 @@ OSCdef.new(
 		var scale;
 		if(~paramsArray[2] == 0, {scale = Scale.major}, {scale = Scale.minor});
 
-		Pbind(\degree, Pseq([~notesArray]), \dur, ~paramsArray[0], \amp, ~paramsArray[1], \scale, scale).play;
+		Pbind(\degree, Pseq([~notesArray]), \dur, ~paramsArray[0], \amp, ~paramsArray[1], \scale, scale, \octave, ~paramsArray[3]).play;
 		~notesArray = Array.new(~numNotes);
 		~paramsArray = Array.new(~numParams);
 	},

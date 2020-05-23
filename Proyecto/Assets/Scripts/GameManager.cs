@@ -8,10 +8,10 @@ public class GameManager : MonoBehaviour {
 	BoxCollider parar;
 	public UnityEngine.UI.Text textoEnergia, textoJoyas, textoGanarPerder, textovolvermenu;//UI
 	public GameObject tryAgain, exit, volvermenu;
-	int joyasTotales;
+	[HideInInspector] public int joyasTotales;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		instance = this;
 		nuevo = GameObject.FindWithTag("Player").GetComponent<PlayerController> ();//encuentra el objeto con tag player y usa su componente playercontroller
         joyasTotales = GameObject.FindGameObjectsWithTag("Joya").Length;//encuentra objetos con tag joya

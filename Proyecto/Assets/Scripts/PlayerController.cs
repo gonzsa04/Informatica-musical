@@ -5,7 +5,9 @@ using System;
 public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	public int energia=100;//energia total
+    public int maxEnergia = 100;
 	public int numJoyas=0;//joyas portadas
+	public int numJoyasRecogidas=0;//joyas portadas
 	GameObject nuevaJoya;
     public GameObject Joya;
     public GameObject muro;
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour {
 			if (coll [i].CompareTag ("Joya")) {//si un elemento del array tiene tag joya
 				Destroy(coll[i].gameObject);//se destruye ese gameobject(nos le guardamos)
 				numJoyas++;//aumenta el numero de joyas cogidas en uno
+                numJoyasRecogidas++;
 			}
 	}
     void sueltaJoya()
@@ -75,11 +78,12 @@ public class PlayerController : MonoBehaviour {
             nuevaJoya = Instantiate(Joya);//hacemos aparecer una joya
             nuevaJoya.transform.position = this.transform.position;//la colocamos en la posicion del jugador
             numJoyas--;//disminuye el numero de joyas en uno
+            numJoyasRecogidas--;
         }
     }
 
     public void Reset() {//repone la energia y te quita las joyas
-            energia = 100;
+            energia = maxEnergia;
             numJoyas = 0;
             this.transform.position = exit.transform.position+exit.transform.forward;
             this.transform.rotation = exit.transform.rotation;//se pone al jugador uno mas alante que la posicion de exit, con su misma rotacion 
