@@ -51,9 +51,9 @@ public class DynamicMusicManager : MonoBehaviour
 
     public static void play()
     {
-        OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadNote", song[musicIndex]);
+        /*OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadNote", song[musicIndex]);
         OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadParams", modes[modeIndex].parameters);
-        OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/play", 0.6f);
+        OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/play", 0.6f);*/
 
         musicIndex++;
         if (musicIndex >= song.Count) musicIndex = 0;
@@ -66,7 +66,7 @@ public class DynamicMusicManager : MonoBehaviour
         float energyMode = modes.Count - (playerController.energia / energyModeInterval);
         float joyasMode = playerController.numJoyasRecogidas / joyasModeInterval;
 
-        modeIndex = (int)((energyMode * 1/2) + (enemyMode * 1/3) + (joyasMode * 1/6));
+        modeIndex = (int)((energyMode * 1.0/3.0) + (enemyMode * 1.0/2.0) + (joyasMode * 1.0/6.0));
 
         Debug.Log(modeIndex);
     }

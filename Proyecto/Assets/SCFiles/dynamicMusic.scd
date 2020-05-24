@@ -1,6 +1,6 @@
 (
 
-~kkVar = Buffer.read(Server.default, "D:/Users/Gonzalo/Desktop/UCM/1ro/MOTORES/Grupo28/Assets/Sounds/bShoot.wav");
+~kkVar = Buffer.read(Server.default, "..//Sounds/bShoot.wav");
 ~numNotes = 5;
 ~notesArray = Array.new(~numNotes);
 ~numParams = 5;
@@ -54,6 +54,7 @@ OSCdef.new(
 	{arg msg;
 		//msg[1].postln;
 		var scale;
+		//SCALES
 		if(~paramsArray[2] == 0, {scale = Scale.major});
 		if(~paramsArray[2] == 1, {scale = Scale.minor});
 		if(~paramsArray[2] == 2, {scale = Scale.lydian});
@@ -63,6 +64,7 @@ OSCdef.new(
 		if(~paramsArray[2] == 6, {scale = Scale.aeolian});
 		if(~paramsArray[2] == 7, {scale = Scale.phrygian});
 		if(~paramsArray[2] == 8, {scale = Scale.locrian});
+		//SCALES
 
 		Pbind(\degree, Pseq([~notesArray]), \dur, ~paramsArray[0], \amp, ~paramsArray[1] * msg[1], \scale, scale, \octave, ~paramsArray[3]).play;
 		~notesArray = Array.new(~numNotes);
