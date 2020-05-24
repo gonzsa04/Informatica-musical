@@ -40,7 +40,7 @@ public class DynamicMusicManager : MonoBehaviour
         energyModeInterval = (float)(playerController.maxEnergia) / modes.Count;
         joyasModeInterval = (float)(GameManager.instance.joyasTotales) / modes.Count;
 
-        InvokeRepeating("playAmbient", 0.0f, 1.5f);
+        InvokeRepeating("playAmbient", 0.0f, 0.6f);
     }
 
     private void load()
@@ -51,9 +51,9 @@ public class DynamicMusicManager : MonoBehaviour
 
     public static void play()
     {
-        /*OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadNote", song[musicIndex]);
+        OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadNote", new List<float>() { 0, 1 });
         OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadParams", modes[modeIndex].parameters);
-        OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/play", 0.6f);*/
+        OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/play", 0.6f);
 
         musicIndex++;
         if (musicIndex >= song.Count) musicIndex = 0;
@@ -75,7 +75,7 @@ public class DynamicMusicManager : MonoBehaviour
     {
         OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadNote", song[ambientMusicIndex]);
         OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadParams", modes[modeIndex].parameters);
-        OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/play", 0.3f);
+        OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/play", 0.1f);
 
         ambientMusicIndex++;
         if (ambientMusicIndex >= song.Count) ambientMusicIndex = 0;

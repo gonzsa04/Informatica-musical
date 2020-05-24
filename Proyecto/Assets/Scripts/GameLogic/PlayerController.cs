@@ -53,10 +53,6 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.C) && energia > 20 * (1 + numJoyas))
         {//si pulsamos c y la energia nos lo permite
             cogeJoya();//llamamos a cogejoya
-                       //osc
-            float coge = 1.0f;
-            OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/coge", coge);
-            Debug.Log("coge");
         }
         else if (Input.GetKeyDown(KeyCode.Z) || energia < 20 * numJoyas)//si pulsamos z o nuestra energia es muy baja
             sueltaJoya();//llamamos a sueltajoya
@@ -69,7 +65,11 @@ public class PlayerController : MonoBehaviour {
 				Destroy(coll[i].gameObject);//se destruye ese gameobject(nos le guardamos)
 				numJoyas++;//aumenta el numero de joyas cogidas en uno
                 numJoyasRecogidas++;
-			}
+
+                float coge = 1.0f;
+                OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/coge", coge);
+                Debug.Log("coge");
+            }
 	}
     void sueltaJoya()
     {
@@ -79,6 +79,10 @@ public class PlayerController : MonoBehaviour {
             nuevaJoya.transform.position = this.transform.position;//la colocamos en la posicion del jugador
             numJoyas--;//disminuye el numero de joyas en uno
             numJoyasRecogidas--;
+
+            float coge = 1.0f;
+            OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/coge", coge);
+            Debug.Log("coge");
         }
     }
 

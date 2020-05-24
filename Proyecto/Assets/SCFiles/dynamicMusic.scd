@@ -1,6 +1,6 @@
 (
 
-~kkVar = Buffer.read(Server.default, "..//Sounds/bShoot.wav");
+~joyaSound = Buffer.read(Server.default, "..//Sounds/crystalSound.wav");
 ~numNotes = 5;
 ~notesArray = Array.new(~numNotes);
 ~numParams = 5;
@@ -25,7 +25,7 @@ OSCdef.new(
 	{arg msg;
 		//[msg].postln;
 
-		Synth(\sampler, [\buffer, ~kkVar]);
+		Synth(\sampler, [\buffer, ~joyaSound]);
 	},
 	'/coge',
 	nil,57120
