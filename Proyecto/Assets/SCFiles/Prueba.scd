@@ -54,9 +54,17 @@ OSCdef.new(
 	{arg msg;
 		//msg[1].postln;
 		var scale;
-		if(~paramsArray[2] == 0, {scale = Scale.major}, {scale = Scale.minor});
+		if(~paramsArray[2] == 0, {scale = Scale.major});
+		if(~paramsArray[2] == 1, {scale = Scale.minor});
+		if(~paramsArray[2] == 2, {scale = Scale.lydian});
+		if(~paramsArray[2] == 3, {scale = Scale.ionian});
+		if(~paramsArray[2] == 4, {scale = Scale.mixolydian});
+		if(~paramsArray[2] == 5, {scale = Scale.dorian});
+		if(~paramsArray[2] == 6, {scale = Scale.aeolian});
+		if(~paramsArray[2] == 7, {scale = Scale.phrygian});
+		if(~paramsArray[2] == 8, {scale = Scale.locrian});
 
-		Pbind(\degree, Pseq([~notesArray]), \dur, ~paramsArray[0], \amp, ~paramsArray[1], \scale, scale, \octave, ~paramsArray[3]).play;
+		Pbind(\degree, Pseq([~notesArray]), \dur, ~paramsArray[0], \amp, ~paramsArray[1] * msg[1], \scale, scale, \octave, ~paramsArray[3]).play;
 		~notesArray = Array.new(~numNotes);
 		~paramsArray = Array.new(~numParams);
 	},
