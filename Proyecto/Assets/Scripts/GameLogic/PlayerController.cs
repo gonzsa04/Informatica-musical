@@ -79,9 +79,8 @@ public class PlayerController : MonoBehaviour {
             nuevaJoya.transform.position = this.transform.position;//la colocamos en la posicion del jugador
             numJoyas--;//disminuye el numero de joyas en uno
             numJoyasRecogidas--;
-
-            float coge = 1.0f;
-            OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/coge", coge);
+            
+            OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/coge", 1.0f);
             Debug.Log("coge");
         }
     }
@@ -95,8 +94,11 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-		if (other.CompareTag ("Fantasma")) //si colisiona con un objeto con tag fantasma
-			GameManager.instance.GameOver (); //invoca al gameover
+        if (other.CompareTag("Fantasma"))
+        { //si colisiona con un objeto con tag fantasma
+            OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/muere", 1.0f);
+            GameManager.instance.GameOver(); //invoca al gameover
+        }
     }
 
     void MapCamera()//al pulsar M

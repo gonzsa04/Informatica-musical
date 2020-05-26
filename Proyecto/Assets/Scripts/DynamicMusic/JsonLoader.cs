@@ -33,10 +33,16 @@ public class MusicLoader
         {
             Mode mode = new Mode();
             mode.parameters = new List<float>();
+            mode.chord = new List<float>();
             for (int j = 0; j < rawJson_[2]["modes"][i]["params"].Count; j++)
             {
                 mode.parameters.Add(rawJson_[2]["modes"][i]["params"][j]);
             }
+            for (int j = 0; j < rawJson_[2]["modes"][i]["chord"].Count; j++)
+            {
+                mode.chord.Add(rawJson_[2]["modes"][i]["chord"][j]);
+            }
+
             modes.Add(mode);
         }
 

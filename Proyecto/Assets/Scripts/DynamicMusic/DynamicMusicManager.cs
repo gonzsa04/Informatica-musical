@@ -5,6 +5,7 @@ using UnityEngine;
 public struct Mode
 {
     public List<float> parameters; // DUR, AMP, SCALE, OCTAVE
+    public List<float> chord;      // acorde
 }
 
 public class DynamicMusicManager : MonoBehaviour
@@ -51,9 +52,9 @@ public class DynamicMusicManager : MonoBehaviour
 
     public static void play()
     {
-        OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadNote", new List<float>() { 0, 1 });
+        OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadNote", modes[modeIndex].chord);
         OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadParams", modes[modeIndex].parameters);
-        OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/play", 0.6f);
+        OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/notePlay", 0.4f);
 
         musicIndex++;
         if (musicIndex >= song.Count) musicIndex = 0;
@@ -75,7 +76,7 @@ public class DynamicMusicManager : MonoBehaviour
     {
         OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadNote", song[ambientMusicIndex]);
         OSCHandler.Instance.SendMessagesToClient<float>("SuperCollider", "/loadParams", modes[modeIndex].parameters);
-        OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/play", 0.1f);
+        OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/degreePlay", 0.2f);
 
         ambientMusicIndex++;
         if (ambientMusicIndex >= song.Count) ambientMusicIndex = 0;
