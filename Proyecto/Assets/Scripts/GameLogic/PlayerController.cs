@@ -65,9 +65,9 @@ public class PlayerController : MonoBehaviour {
 				Destroy(coll[i].gameObject);//se destruye ese gameobject(nos le guardamos)
 				numJoyas++;//aumenta el numero de joyas cogidas en uno
                 numJoyasRecogidas++;
-
-                float coge = 1.0f;
-                OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/coge", coge);
+                
+                //SUPERCOLLIDER: se envia un mensaje a SC para emitir el sonido de coger joya
+                OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/coge", 1.0f);
                 Debug.Log("coge");
             }
 	}
@@ -79,7 +79,8 @@ public class PlayerController : MonoBehaviour {
             nuevaJoya.transform.position = this.transform.position;//la colocamos en la posicion del jugador
             numJoyas--;//disminuye el numero de joyas en uno
             numJoyasRecogidas--;
-            
+
+            //SUPERCOLLIDER: se envia un mensaje a SC para emitir el sonido de coger joya
             OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/coge", 1.0f);
             Debug.Log("coge");
         }
@@ -96,6 +97,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (other.CompareTag("Fantasma"))
         { //si colisiona con un objeto con tag fantasma
+            //SUPERCOLLIDER: se envia un mensaje a SC para emitir el sonido de muerte
             OSCHandler.Instance.SendMessageToClient<float>("SuperCollider", "/muere", 1.0f);
             GameManager.instance.GameOver(); //invoca al gameover
         }

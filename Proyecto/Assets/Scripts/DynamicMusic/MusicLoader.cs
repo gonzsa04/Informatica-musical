@@ -8,6 +8,7 @@ public class MusicLoader
 {
     private static JSONNode rawJson_;
 
+    //carga la cancion de ambiente (sus acordes) 
     public static List<List<float>> LoadSong()
     {
         List<List<float>> song = new List<List<float>>();
@@ -25,6 +26,7 @@ public class MusicLoader
         return song;
     }
 
+    //carga los parametros de todos los modos (DUR, AMP, SCALE, OCTAVE)
     public static List<Mode> LoadModes()
     {
         List<Mode> modes = new List<Mode>();

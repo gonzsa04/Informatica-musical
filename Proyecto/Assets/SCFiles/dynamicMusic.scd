@@ -24,6 +24,7 @@ SynthDef(\sampler, {
 OSCdef.new(
 	\coge,
 	{arg msg;
+		print("kk");
 		Synth(\sampler, [\buffer, ~joyaSound]);
 	},
 	'/coge',
